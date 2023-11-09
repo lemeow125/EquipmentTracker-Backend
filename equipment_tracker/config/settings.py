@@ -66,6 +66,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'djoser',
     'corsheaders',
+    'drf_spectacular',
+    'drf_spectacular_sidecar',
     'accounts'
 ]
 
@@ -125,6 +127,19 @@ REST_FRAMEWORK = {
         'user': '1440/min'
 
     },
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+# DRF-Spectacular
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'CITC Equipment Tracker Backend',
+    'DESCRIPTION': 'An IT Elective 4 Project',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'SWAGGER_UI_DIST': 'SIDECAR',
+    'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
+    'REDOC_DIST': 'SIDECAR',
+    # OTHER SETTINGS
 }
 
 WSGI_APPLICATION = 'config.wsgi.application'
