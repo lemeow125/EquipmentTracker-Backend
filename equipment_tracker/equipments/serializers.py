@@ -116,12 +116,14 @@ class EquipmentInstanceLogsSerializer(serializers.HyperlinkedModelSerializer):
     history_date = serializers.DateTimeField(
         format="%m-%d-%Y %I:%M%p", read_only=True)
     history_user = serializers.SerializerMethodField()
+    equipment = serializers.PrimaryKeyRelatedField(
+        source='equipment.name', queryset=Equipment.objects.all())
 
     class Meta:
         model = EquipmentInstance.history.model
-        fields = ('history_id', 'status', 'remarks',
+        fields = ('history_id', 'id', 'equipment', 'status', 'remarks',
                   'history_date', 'history_user')
-        read_only_fields = ('history_id', 'id', 'status', 'remarks',
+        read_only_fields = ('history_id', 'id', 'equipment', 'status', 'remarks',
                             'history_date', 'history_user')
 
     def get_history_user(self, obj):
