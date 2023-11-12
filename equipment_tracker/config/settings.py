@@ -64,8 +64,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
+    'simple_history',
     'djoser',
-    'corsheaders'
+    'corsheaders',
+    'drf_spectacular',
+    'drf_spectacular_sidecar',
+    'accounts',
+    'equipments',
 ]
 
 MIDDLEWARE = [
@@ -124,6 +129,19 @@ REST_FRAMEWORK = {
         'user': '1440/min'
 
     },
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+# DRF-Spectacular
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'CITC Equipment Tracker Backend',
+    'DESCRIPTION': 'An IT Elective 4 Project',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'SWAGGER_UI_DIST': 'SIDECAR',
+    'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
+    'REDOC_DIST': 'SIDECAR',
+    # OTHER SETTINGS
 }
 
 WSGI_APPLICATION = 'config.wsgi.application'
@@ -139,11 +157,21 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
 DJOSER = {
     'SEND_ACTIVATION_EMAIL': True,
     'SEND_CONFIRMATION_EMAIL': True,
+    'EMAIL': {
+        'activation': 'config.email.ActivationEmail'
+    },
     'ACTIVATION_URL': 'activation/{uid}/{token}',
     'USER_AUTHENTICATION_RULES': ['djoser.authentication.TokenAuthenticationRule'],
+    'SERIALIZERS': {
+        'user': 'accounts.serializers.CustomUserSerializer',
+        'current_user': 'accounts.serializers.CustomUserSerializer',
+        'user_create': 'accounts.serializers.UserRegistrationSerializer',
+    },
 }
 
 # Password validation

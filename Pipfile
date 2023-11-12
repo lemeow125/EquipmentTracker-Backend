@@ -10,6 +10,11 @@ python-dotenv = "*"
 whitenoise = "*"
 djoser = "*"
 django-cors-headers = "*"
+drf-spectacular = {version = "*", extras = ["sidecar"]}
+django-extra-fields = "*"
+pillow = "*"
+psycopg2 = "*"
+django-simple-history = "*"
 
 [dev-packages]
 
