@@ -513,6 +513,414 @@ paths:
               schema:
                 $ref: '#/components/schemas/SetUsername'
           description: ''
+  /api/v1/equipments/equipment_instances/:
+    get:
+      operationId: api_v1_equipments_equipment_instances_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EquipmentInstance'
+          description: ''
+    post:
+      operationId: api_v1_equipments_equipment_instances_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EquipmentInstance'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EquipmentInstance'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EquipmentInstance'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EquipmentInstance'
+          description: ''
+  /api/v1/equipments/equipment_instances/{equipment_id}/logs/:
+    get:
+      operationId: api_v1_equipments_equipment_instances_logs_list_2
+      parameters:
+      - in: path
+        name: equipment_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EquipmentInstanceLog'
+          description: ''
+  /api/v1/equipments/equipment_instances/{id}/:
+    get:
+      operationId: api_v1_equipments_equipment_instances_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this equipment instance.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EquipmentInstance'
+          description: ''
+    put:
+      operationId: api_v1_equipments_equipment_instances_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this equipment instance.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EquipmentInstance'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EquipmentInstance'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EquipmentInstance'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EquipmentInstance'
+          description: ''
+    patch:
+      operationId: api_v1_equipments_equipment_instances_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this equipment instance.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedEquipmentInstance'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedEquipmentInstance'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedEquipmentInstance'
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EquipmentInstance'
+          description: ''
+    delete:
+      operationId: api_v1_equipments_equipment_instances_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this equipment instance.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/v1/equipments/equipment_instances/latest:
+    get:
+      operationId: api_v1_equipments_equipment_instances_latest_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EquipmentInstance'
+          description: ''
+  /api/v1/equipments/equipment_instances/logs:
+    get:
+      operationId: api_v1_equipments_equipment_instances_logs_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EquipmentInstanceLogs'
+          description: ''
+  /api/v1/equipments/equipments/:
+    get:
+      operationId: api_v1_equipments_equipments_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Equipment'
+          description: ''
+    post:
+      operationId: api_v1_equipments_equipments_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Equipment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Equipment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Equipment'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Equipment'
+          description: ''
+  /api/v1/equipments/equipments/{equipment_id}/logs/:
+    get:
+      operationId: api_v1_equipments_equipments_logs_list_2
+      parameters:
+      - in: path
+        name: equipment_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EquipmentLog'
+          description: ''
+  /api/v1/equipments/equipments/{id}/:
+    get:
+      operationId: api_v1_equipments_equipments_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this equipment.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Equipment'
+          description: ''
+    put:
+      operationId: api_v1_equipments_equipments_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this equipment.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Equipment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Equipment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Equipment'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Equipment'
+          description: ''
+    patch:
+      operationId: api_v1_equipments_equipments_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this equipment.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedEquipment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedEquipment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedEquipment'
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Equipment'
+          description: ''
+    delete:
+      operationId: api_v1_equipments_equipments_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this equipment.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/v1/equipments/equipments/latest:
+    get:
+      operationId: api_v1_equipments_equipments_latest_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Equipment'
+          description: ''
+  /api/v1/equipments/equipments/logs:
+    get:
+      operationId: api_v1_equipments_equipments_logs_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EquipmentLogs'
+          description: ''
 components:
   schemas:
     Activation:
@@ -552,6 +960,187 @@ components:
       - first_name
       - last_name
       - username
+    Equipment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+        description:
+          type: string
+        last_updated:
+          type: string
+          format: date-time
+          readOnly: true
+        last_updated_by:
+          type: string
+          readOnly: true
+        date_added:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - date_added
+      - description
+      - id
+      - last_updated
+      - last_updated_by
+      - name
+    EquipmentInstance:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        equipment:
+          type: integer
+        status:
+          type: string
+        remarks:
+          type: string
+        last_updated:
+          type: string
+          format: date-time
+          readOnly: true
+        last_updated_by:
+          type: string
+          readOnly: true
+        date_added:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - date_added
+      - equipment
+      - id
+      - last_updated
+      - last_updated_by
+      - remarks
+      - status
+    EquipmentInstanceLog:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        equipment:
+          type: integer
+        status:
+          type: string
+        remarks:
+          type: string
+        last_updated:
+          type: string
+          format: date-time
+          readOnly: true
+        date_added:
+          type: string
+          format: date-time
+          readOnly: true
+        last_updated_by:
+          type: string
+          readOnly: true
+        history:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+      required:
+      - date_added
+      - equipment
+      - history
+      - id
+      - last_updated
+      - last_updated_by
+      - remarks
+      - status
+    EquipmentInstanceLogs:
+      type: object
+      properties:
+        history_id:
+          type: integer
+          readOnly: true
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          readOnly: true
+        remarks:
+          type: string
+          readOnly: true
+        history_date:
+          type: string
+          format: date-time
+          readOnly: true
+        history_user:
+          type: string
+          readOnly: true
+      required:
+      - history_date
+      - history_id
+      - history_user
+      - remarks
+      - status
+    EquipmentLog:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+        description:
+          type: string
+        last_updated:
+          type: string
+          format: date-time
+          readOnly: true
+        date_added:
+          type: string
+          format: date-time
+          readOnly: true
+        last_updated_by:
+          type: string
+          readOnly: true
+        history:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+      required:
+      - date_added
+      - description
+      - history
+      - id
+      - last_updated
+      - last_updated_by
+      - name
+    EquipmentLogs:
+      type: object
+      properties:
+        history_id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        description:
+          type: string
+          readOnly: true
+        history_date:
+          type: string
+          format: date-time
+          readOnly: true
+        history_user:
+          type: string
+          readOnly: true
+      required:
+      - description
+      - history_date
+      - history_id
+      - history_user
+      - name
     PasswordResetConfirm:
       type: object
       properties:
@@ -587,6 +1176,50 @@ components:
         last_name:
           type: string
           maxLength: 100
+    PatchedEquipment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+        description:
+          type: string
+        last_updated:
+          type: string
+          format: date-time
+          readOnly: true
+        last_updated_by:
+          type: string
+          readOnly: true
+        date_added:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedEquipmentInstance:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        equipment:
+          type: integer
+        status:
+          type: string
+        remarks:
+          type: string
+        last_updated:
+          type: string
+          format: date-time
+          readOnly: true
+        last_updated_by:
+          type: string
+          readOnly: true
+        date_added:
+          type: string
+          format: date-time
+          readOnly: true
     SendEmailReset:
       type: object
       properties:
@@ -620,6 +1253,15 @@ components:
       required:
       - current_password
       - new_username
+    StatusEnum:
+      enum:
+      - Working
+      - Broken
+      - Under Maintenance
+      - Decomissioned
+      type: string
+      description: "* `Working` - Working\n* `Broken` - Broken\n* `Under Maintenance`\
+        \ - Under Maintenance\n* `Decomissioned` - Decomissioned  "
     TokenObtainPair:
       type: object
       properties:
