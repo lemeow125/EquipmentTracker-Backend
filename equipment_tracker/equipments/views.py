@@ -3,13 +3,14 @@ from rest_framework import viewsets, generics
 from .models import Equipment, EquipmentInstance
 from . import serializers
 from config.settings import DEBUG
+from accounts.permissions import IsTechnician
 
 # -- Equipment Viewsets
 
 
 class EquipmentViewSet(viewsets.ModelViewSet):
     if (not DEBUG):
-        permission_classes = [IsAuthenticated]
+        permission_classes = [IsAuthenticated, IsTechnician]
     serializer_class = serializers.EquipmentSerializer
     queryset = Equipment.objects.all().order_by('-date_added')
 
@@ -18,7 +19,7 @@ class EquipmentViewSet(viewsets.ModelViewSet):
 
 class EquipmentsLogsViewSet(generics.ListAPIView):
     if (not DEBUG):
-        permission_classes = [IsAuthenticated]
+        permission_classes = [IsAuthenticated, IsTechnician]
     serializer_class = serializers.EquipmentLogsSerializer
     queryset = Equipment.history.all().order_by('-history_date')
 
@@ -27,7 +28,7 @@ class EquipmentsLogsViewSet(generics.ListAPIView):
 
 class EquipmentLogViewSet(viewsets.ReadOnlyModelViewSet):
     if (not DEBUG):
-        permission_classes = [IsAuthenticated]
+        permission_classes = [IsAuthenticated, IsTechnician]
     serializer_class = serializers.EquipmentLogSerializer
 
     def get_queryset(self):
@@ -39,7 +40,7 @@ class EquipmentLogViewSet(viewsets.ReadOnlyModelViewSet):
 
 class LastUpdatedEquipmentViewSet(generics.ListAPIView):
     if (not DEBUG):
-        permission_classes = [IsAuthenticated]
+        permission_classes = [IsAuthenticated, IsTechnician]
     serializer_class = serializers.EquipmentSerializer
     queryset = Equipment.objects.all().order_by('-date_added')
 
@@ -51,7 +52,7 @@ class LastUpdatedEquipmentViewSet(generics.ListAPIView):
 
 class EquipmentInstanceViewSet(viewsets.ModelViewSet):
     if (not DEBUG):
-        permission_classes = [IsAuthenticated]
+        permission_classes = [IsAuthenticated, IsTechnician]
     serializer_class = serializers.EquipmentInstanceSerializer
     queryset = EquipmentInstance.objects.all().order_by('-date_added')
 
@@ -60,7 +61,7 @@ class EquipmentInstanceViewSet(viewsets.ModelViewSet):
 
 class EquipmentInstancesLogsViewSet(generics.ListAPIView):
     if (not DEBUG):
-        permission_classes = [IsAuthenticated]
+        permission_classes = [IsAuthenticated, IsTechnician]
     serializer_class = serializers.EquipmentInstanceLogsSerializer
     queryset = EquipmentInstance.history.all().order_by('-history_date')
 
@@ -69,7 +70,7 @@ class EquipmentInstancesLogsViewSet(generics.ListAPIView):
 
 class EquipmentInstanceLogViewSet(viewsets.ReadOnlyModelViewSet):
     if (not DEBUG):
-        permission_classes = [IsAuthenticated]
+        permission_classes = [IsAuthenticated, IsTechnician]
     serializer_class = serializers.EquipmentInstanceLogSerializer
 
     def get_queryset(self):
@@ -81,7 +82,7 @@ class EquipmentInstanceLogViewSet(viewsets.ReadOnlyModelViewSet):
 
 class LastUpdatedEquipmentInstanceViewSet(generics.ListAPIView):
     if (not DEBUG):
-        permission_classes = [IsAuthenticated]
+        permission_classes = [IsAuthenticated, IsTechnician]
     serializer_class = serializers.EquipmentInstanceSerializer
     queryset = EquipmentInstance.objects.all().order_by('-date_added')
 
