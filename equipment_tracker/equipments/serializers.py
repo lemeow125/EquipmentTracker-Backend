@@ -91,6 +91,7 @@ class EquipmentInstanceSerializer(serializers.HyperlinkedModelSerializer):
     last_updated = serializers.DateTimeField(
         format="%m-%d-%Y %I:%M%p", read_only=True)
     last_updated_by = serializers.SerializerMethodField()
+    status = serializers.ChoiceField(choices=EquipmentInstance.STATUS_CHOICES)
 
     # Forbid user from changing equipment field once the instance is already created
     def update(self, instance, validated_data):
