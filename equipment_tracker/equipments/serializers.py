@@ -30,12 +30,13 @@ class EquipmentSerializer(serializers.HyperlinkedModelSerializer):
         read_only_fields = ('id', 'last_updated',
                             'last_updated_by', 'date_added')
 
+    @extend_schema_field(OpenApiTypes.STR)
     def get_history_user(self, obj):
         return obj.history_user.username if obj.history_user else None
 
     @extend_schema_field(OpenApiTypes.STR)
     def get_last_updated_by(self, obj):
-        return obj.history.first().history_user if obj.history.first().history_user else None
+        return obj.history.first().history_user.username if obj.history.first().history_user else None
 
 
 class EquipmentLogsSerializer(serializers.HyperlinkedModelSerializer):
@@ -74,7 +75,7 @@ class EquipmentLogSerializer(serializers.HyperlinkedModelSerializer):
 
     @extend_schema_field(OpenApiTypes.STR)
     def get_last_updated_by(self, obj):
-        return obj.history.first().history_user if obj.history.first().history_user else None
+        return obj.history.first().history_user.username if obj.history.first().history_user else None
 
 # -- Equipment Instance Serializers
 
@@ -117,7 +118,7 @@ class EquipmentInstanceSerializer(serializers.HyperlinkedModelSerializer):
 
     @extend_schema_field(OpenApiTypes.STR)
     def get_last_updated_by(self, obj):
-        return obj.history.first().history_user if obj.history.first().history_user else None
+        return obj.history.first().history_user.username if obj.history.first().history_user else None
 
 
 class EquipmentInstanceLogsSerializer(serializers.HyperlinkedModelSerializer):
@@ -166,4 +167,4 @@ class EquipmentInstanceLogSerializer(serializers.HyperlinkedModelSerializer):
 
     @extend_schema_field(OpenApiTypes.STR)
     def get_last_updated_by(self, obj):
-        return obj.history.first().history_user if obj.history.first().history_user else None
+        return obj.history.first().history_user.username if obj.history.first().history_user else None
