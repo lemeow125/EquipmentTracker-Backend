@@ -59,7 +59,7 @@ def create_superuser(sender, **kwargs):
         if not User.objects.filter(username=username).exists():
             # Create the superuser with is_active set to False
             superuser = User.objects.create_superuser(
-                username=username, email=email, password=password, first_name=first_name, last_name=last_name)
+                username=username, email=email, password=password, first_name=first_name, last_name=last_name, is_technician=True)
 
             # Activate the superuser
             superuser.is_active = True
