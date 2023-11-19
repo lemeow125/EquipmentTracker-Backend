@@ -29,7 +29,6 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-FRONTEND_DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 # CSRF_TRUSTED_ORIGINS = [] To-do: Specify URL to web frontend
@@ -163,9 +162,6 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 DJOSER = {
     'SEND_ACTIVATION_EMAIL': True,
     'SEND_CONFIRMATION_EMAIL': True,
-    'EMAIL': {
-        'activation': 'config.email.ActivationEmail'
-    },
     'ACTIVATION_URL': 'activation/{uid}/{token}',
     'USER_AUTHENTICATION_RULES': ['djoser.authentication.TokenAuthenticationRule'],
     'SERIALIZERS': {
@@ -211,11 +207,7 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-DOMAIN = ''
-if (FRONTEND_DEBUG):
-    DOMAIN = 'exp'
-else:
-    DOMAIN = 'citctracker'
+DOMAIN = 'CITC-Tracker.keannu1.duckdns.org'
 
 SITE_NAME = 'CITC Equipment Tracker'
 
