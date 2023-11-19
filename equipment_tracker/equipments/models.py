@@ -42,9 +42,13 @@ def create_superuser(sender, **kwargs):
     if sender.name == 'equipments':
         EQUIPMENT, CREATED = Equipment.objects.get_or_create(
             name="HP All-in-One PC", description="I5 6500 8GB RAM 1TB HDD")
-        if (CREATED):
-            print("Created sample equipment")
         EQUIPMENT_INSTANCE, CREATED = EquipmentInstance.objects.get_or_create(
-            equipment=EQUIPMENT, status="Working", remarks="First PC of USTP!")
-        if (CREATED):
-            print("Created sample equipment instance")
+            equipment=EQUIPMENT, status="Working", remarks="First PC of citc equipment tracker!")
+        EQUIPMENT, CREATED = Equipment.objects.get_or_create(
+            name="HP Keyboard", description="Generic Membrane Keyboard")
+        EQUIPMENT_INSTANCE, CREATED = EquipmentInstance.objects.get_or_create(
+            equipment=EQUIPMENT, status="Working", remarks="First keyboard of citc equipment tracker!")
+        EQUIPMENT, CREATED = Equipment.objects.get_or_create(
+            name="HP Mouse", description="Generic Mouse")
+        EQUIPMENT_INSTANCE, CREATED = EquipmentInstance.objects.get_or_create(
+            equipment=EQUIPMENT, status="Working", remarks="First mouse of citc equipment tracker!")

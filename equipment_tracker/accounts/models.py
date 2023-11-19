@@ -37,6 +37,7 @@ class CustomUser(AbstractUser):
     # Password inherited from base user class
     # is_admin inherited from base user class
     is_active = models.BooleanField(default=False)
+    is_technician = models.BooleanField(default=False)
     avatar = models.ImageField(upload_to=_get_upload_to, null=True)
 
     @property
@@ -65,11 +66,11 @@ def create_superuser(sender, **kwargs):
             print('Created admin account')
             superuser.save()
 
-        username = 'usertest1'
+        username = 'test-user-technician'
         email = os.getenv('DJANGO_ADMIN_EMAIL')
         password = os.getenv('DJANGO_ADMIN_PASSWORD')
         first_name = 'Test'
-        last_name = 'User'
+        last_name = 'Technician'
 
         if not User.objects.filter(username=username).exists():
             # Create the superuser with is_active set to False
@@ -78,5 +79,5 @@ def create_superuser(sender, **kwargs):
 
             # Activate the user
             user.is_active = True
-            print('Created debug user account')
+            print('Created debug technician account')
             user.save()
