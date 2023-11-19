@@ -162,6 +162,7 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 DJOSER = {
     'SEND_ACTIVATION_EMAIL': True,
     'SEND_CONFIRMATION_EMAIL': True,
+    'PASSWORD_RESET_CONFIRM_URL': 'reset_password_confirm/{uid}/{token}',
     'ACTIVATION_URL': 'activation/{uid}/{token}',
     'USER_AUTHENTICATION_RULES': ['djoser.authentication.TokenAuthenticationRule'],
     'SERIALIZERS': {
