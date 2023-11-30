@@ -15,6 +15,7 @@ django-extra-fields = "*"
 pillow = "*"
 psycopg2 = "*"
 django-simple-history = "*"
+django-unfold = "*"
 
 [dev-packages]
 

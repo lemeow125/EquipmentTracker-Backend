@@ -55,6 +55,8 @@ else:
 # Application definition
 
 INSTALLED_APPS = [
+    'unfold',
+    'unfold.contrib.simple_history',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
