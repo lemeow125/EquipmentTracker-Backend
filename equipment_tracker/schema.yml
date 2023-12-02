@@ -933,6 +933,22 @@ components:
       required:
       - token
       - uid
+    CategoryEnum:
+      enum:
+      - PC
+      - NETWORKING
+      - CCTV
+      - FURNITURE
+      - PERIPHERALS
+      - MISC
+      type: string
+      description: |-
+        * `PC` - PC
+        * `NETWORKING` - Networking
+        * `CCTV` - CCTV
+        * `FURNITURE` - Furniture
+        * `PERIPHERALS` - Peripherals
+        * `MISC` - Miscellaneous
     CustomUser:
       type: object
       properties:
@@ -970,6 +986,8 @@ components:
           type: string
         description:
           type: string
+        category:
+          $ref: '#/components/schemas/CategoryEnum'
         last_updated:
           type: string
           format: date-time
@@ -996,6 +1014,12 @@ components:
           readOnly: true
         equipment:
           type: integer
+        equipment_name:
+          type: string
+          readOnly: true
+        category:
+          type: string
+          readOnly: true
         status:
           $ref: '#/components/schemas/StatusEnum'
         remarks:
@@ -1012,12 +1036,13 @@ components:
           format: date-time
           readOnly: true
       required:
+      - category
       - date_added
       - equipment
+      - equipment_name
       - id
       - last_updated
       - last_updated_by
-      - remarks
       - status
     EquipmentInstanceLog:
       type: object
@@ -1027,6 +1052,12 @@ components:
           readOnly: true
         equipment:
           type: integer
+        equipment_name:
+          type: string
+          readOnly: true
+        category:
+          type: string
+          readOnly: true
         status:
           type: string
         remarks:
@@ -1048,8 +1079,10 @@ components:
             type: object
             additionalProperties: {}
       required:
+      - category
       - date_added
       - equipment
+      - equipment_name
       - history
       - id
       - last_updated
@@ -1067,6 +1100,12 @@ components:
           readOnly: true
         equipment:
           type: integer
+        equipment_name:
+          type: string
+          readOnly: true
+        category:
+          type: string
+          readOnly: true
         status:
           allOf:
           - $ref: '#/components/schemas/StatusEnum'
@@ -1074,6 +1113,7 @@ components:
         remarks:
           type: string
           readOnly: true
+          nullable: true
         history_date:
           type: string
           format: date-time
@@ -1082,7 +1122,9 @@ components:
           type: string
           readOnly: true
       required:
+      - category
       - equipment
+      - equipment_name
       - history_date
       - history_id
       - history_user
@@ -1099,6 +1141,8 @@ components:
           type: string
         description:
           type: string
+        category:
+          $ref: '#/components/schemas/CategoryEnum'
         last_updated:
           type: string
           format: date-time
@@ -1117,7 +1161,6 @@ components:
             additionalProperties: {}
       required:
       - date_added
-      - description
       - history
       - id
       - last_updated
@@ -1135,6 +1178,9 @@ components:
         description:
           type: string
           readOnly: true
+          nullable: true
+        category:
+          $ref: '#/components/schemas/CategoryEnum'
         history_date:
           type: string
           format: date-time
@@ -1193,6 +1239,8 @@ components:
           type: string
         description:
           type: string
+        category:
+          $ref: '#/components/schemas/CategoryEnum'
         last_updated:
           type: string
           format: date-time
@@ -1212,6 +1260,12 @@ components:
           readOnly: true
         equipment:
           type: integer
+        equipment_name:
+          type: string
+          readOnly: true
+        category:
+          type: string
+          readOnly: true
         status:
           $ref: '#/components/schemas/StatusEnum'
         remarks:
@@ -1262,13 +1316,16 @@ components:
       - new_username
     StatusEnum:
       enum:
-      - Working
-      - Broken
-      - Under Maintenance
-      - Decomissioned
+      - WORKING
+      - BROKEN
+      - MAINTENANCE
+      - DECOMISSIONED
       type: string
-      description: "* `Working` - Working\n* `Broken` - Broken\n* `Under Maintenance`\
-        \ - Under Maintenance\n* `Decomissioned` - Decomissioned  "
+      description: |-
+        * `WORKING` - Working
+        * `BROKEN` - Broken
+        * `MAINTENANCE` - Under Maintenance
+        * `DECOMISSIONED` - Decomissioned
     TokenObtainPair:
       type: object
       properties:

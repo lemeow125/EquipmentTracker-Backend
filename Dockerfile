@@ -15,7 +15,7 @@ WORKDIR /code
 ADD . /code/
 
 # Install pipenv
-RUN pip install --no-cache-dir -r linux-requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Make migrations
 RUN python equipment_tracker/manage.py makemigrations
@@ -24,7 +24,7 @@ RUN python equipment_tracker/manage.py makemigrations
 RUN python equipment_tracker/manage.py migrate
 
 # Generate DRF Spectacular Documentation
-RUN python equipment_tracker/manage.py spectacular --color --file stude/schema.yml
+RUN python equipment_tracker/manage.py spectacular --color --file equipment_tracker/schema.yml
 
 # Expose port 8000 for the web server
 EXPOSE 8000

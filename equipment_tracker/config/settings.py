@@ -28,10 +28,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-# CSRF_TRUSTED_ORIGINS = [] To-do: Specify URL to web frontend
+CSRF_TRUSTED_ORIGINS = [
+    "https://equipment-tracker-frontend.keannu1.duckdns.org"]
 
 # Email credentials
 EMAIL_HOST = ''
@@ -210,7 +211,7 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-DOMAIN = 'citc-tracker.keannu1.duckdns.org'
+DOMAIN = 'equipment-tracker-frontend.keannu1.duckdns.org'
 
 SITE_NAME = 'CITC Equipment Tracker'
 

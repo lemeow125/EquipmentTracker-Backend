@@ -15,7 +15,7 @@ services:
       [
         "sh",
         "-c",
-        "python equipment_tracker/manage.py spectacular --color --file stude/schema.yml && python equipment_tracker/manage.py collectstatic --noinput && python equipment_tracker/manage.py makemigrations && python equipment_tracker/manage.py migrate && python equipment_tracker/manage.py runserver",
+        "python equipment_tracker/manage.py spectacular --color --file equipment_tracker/schema.yml && python equipment_tracker/manage.py collectstatic --noinput && python equipment_tracker/manage.py makemigrations && python equipment_tracker/manage.py migrate && python equipment_tracker/manage.py runserver",
       ]
     volumes:
       - .:/code # For hotreloading
