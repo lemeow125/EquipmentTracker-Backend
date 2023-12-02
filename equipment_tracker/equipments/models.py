@@ -18,7 +18,7 @@ class Equipment(models.Model):
     )
 
     name = models.CharField(max_length=40)
-    description = models.TextField(max_length=512)
+    description = models.TextField(max_length=512, null=True)
     date_added = models.DateTimeField(default=now, editable=False)
     last_updated = models.DateTimeField(auto_now=True, editable=False)
     category = models.CharField(
@@ -40,7 +40,7 @@ class EquipmentInstance(models.Model):
     equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE)
     status = models.CharField(
         max_length=20, choices=STATUS_CHOICES, default='PENDING')
-    remarks = models.TextField(max_length=512)
+    remarks = models.TextField(max_length=512, null=True)
     date_added = models.DateTimeField(default=now, editable=False)
     last_updated = models.DateTimeField(auto_now=True, editable=False)
     history = HistoricalRecords()

@@ -64,7 +64,7 @@ class EquipmentLogSerializer(serializers.HyperlinkedModelSerializer):
         format="%m-%d-%Y %I:%M%p", read_only=True)
     last_updated_by = serializers.SerializerMethodField()
     name = serializers.CharField()
-    description = serializers.CharField()
+    description = serializers.CharField(required=False)
     history = EquipmentHistoricalRecordField()
 
     class Meta:
@@ -86,7 +86,8 @@ class EquipmentInstanceHistoricalRecordField(serializers.ListField):
 
     def to_representation(self, data):
         data = data.annotate(equipment_name=F('equipment__name'))
-        return super().to_representation(data.values('equipment', 'equipment_name', 'status', 'remarks', 'history_date', 'history_user').order_by('-history_date'))
+        data = data.annotate(category=F('equipment__category'))
+        return super().to_representation(data.values('equipment', 'equipment_name', 'category', 'status', 'remarks', 'history_date', 'history_user').order_by('-history_date'))
 
 
 class EquipmentInstanceSerializer(serializers.HyperlinkedModelSerializer):
@@ -94,8 +95,10 @@ class EquipmentInstanceSerializer(serializers.HyperlinkedModelSerializer):
         slug_field='id', queryset=Equipment.objects.all())
     equipment_name = serializers.CharField(
         source='equipment.name', read_only=True)
+    category = serializers.CharField(
+        source='equipment.category', read_only=True)
     status = serializers.CharField()
-    remarks = serializers.CharField()
+    remarks = serializers.CharField(required=False)
     date_added = serializers.DateTimeField(
         format="%m-%d-%Y %I:%M%p", read_only=True)
     last_updated = serializers.DateTimeField(
@@ -111,9 +114,9 @@ class EquipmentInstanceSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = EquipmentInstance
-        fields = ('id', 'equipment', 'equipment_name', 'status', 'remarks',
+        fields = ('id', 'equipment', 'equipment_name', 'category', 'status', 'remarks',
                   'last_updated', 'last_updated_by', 'date_added')
-        read_only_fields = ('id', 'last_updated',
+        read_only_fields = ('id', 'last_updated', 'equipment_name', 'category',
                             'last_updated_by', 'date_added', 'equipment_name')
 
     @extend_schema_field(OpenApiTypes.STR)
@@ -133,12 +136,14 @@ class EquipmentInstanceLogsSerializer(serializers.HyperlinkedModelSerializer):
         slug_field='id', queryset=Equipment.objects.all())
     equipment_name = serializers.CharField(
         source='equipment.name', read_only=True)
+    category = serializers.CharField(
+        source='equipment.category', read_only=True)
 
     class Meta:
         model = EquipmentInstance.history.model
-        fields = ('history_id', 'id', 'equipment', 'equipment_name', 'status', 'remarks',
+        fields = ('history_id', 'id', 'equipment', 'equipment_name', 'category', 'status', 'remarks',
                   'history_date', 'history_user')
-        read_only_fields = ('history_id', 'id', 'equipment', 'status', 'remarks',
+        read_only_fields = ('history_id', 'id', 'equipment', 'equipment_name', 'category', 'status', 'remarks',
                             'history_date', 'history_user', 'equipment_name')
 
     @extend_schema_field(OpenApiTypes.STR)
@@ -159,6 +164,8 @@ class EquipmentInstanceLogSerializer(serializers.HyperlinkedModelSerializer):
         format="%m-%d-%Y %I:%M%p", read_only=True)
     last_updated_by = serializers.SerializerMethodField()
     history = EquipmentInstanceHistoricalRecordField()
+    category = serializers.CharField(
+        source='equipment.category', read_only=True)
 
     # Forbid user from changing equipment field once the instance is already created
     def update(self, instance, validated_data):
@@ -168,9 +175,9 @@ class EquipmentInstanceLogSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = EquipmentInstance
-        fields = ('id', 'equipment', 'equipment_name', 'status', 'remarks',
+        fields = ('id', 'equipment', 'equipment_name', 'category', 'status', 'remarks',
                   'last_updated', 'date_added', 'last_updated_by', 'history')
-        read_only_fields = ('id', 'last_updated',
+        read_only_fields = ('id', 'last_updated', 'equipment_name', 'category',
                             'date_added', 'last_updated_by', 'history', 'equipment_name')
 
     @extend_schema_field(OpenApiTypes.STR)
