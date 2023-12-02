@@ -32,7 +32,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = [
-    "https://equipment-tracker-frontend.keannu1.duckdns.org"]
+    "https://equipment-tracker-backend.keannu1.duckdns.org"]
 
 # Email credentials
 EMAIL_HOST = ''
