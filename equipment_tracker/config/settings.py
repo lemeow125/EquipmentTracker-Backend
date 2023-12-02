@@ -211,7 +211,7 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-DOMAIN = 'equipment-tracker-frontend.keannu1.duckdns.org'
+DOMAIN = 'equipment-tracker-frontend.keannu1.duckdns.org/#'
 
 SITE_NAME = 'CITC Equipment Tracker'
 
