@@ -7,10 +7,22 @@ from django.dispatch import receiver
 
 
 class Equipment(models.Model):
+
+    CATEGORY_CHOICES = (
+        ('PC', 'PC'),
+        ('NETWORKING', 'Networking'),
+        ('CCTV', 'CCTV'),
+        ('FURNITURE', 'Furniture'),
+        ('PERIPHERALS', 'Peripherals'),
+        ('MISC', 'Miscellaneous')
+    )
+
     name = models.CharField(max_length=40)
     description = models.TextField(max_length=512)
     date_added = models.DateTimeField(default=now, editable=False)
     last_updated = models.DateTimeField(auto_now=True, editable=False)
+    category = models.CharField(
+        max_length=20, choices=CATEGORY_CHOICES, default='MISC')
     history = HistoricalRecords()
 
     def __str__(self):
@@ -19,10 +31,10 @@ class Equipment(models.Model):
 
 class EquipmentInstance(models.Model):
     STATUS_CHOICES = (
-        ('Working', 'Working'),
-        ('Broken', 'Broken'),
-        ('Under Maintenance', 'Under Maintenance'),
-        ('Decomissioned', 'Decomissioned  '),
+        ('WORKING', 'Working'),
+        ('BROKEN', 'Broken'),
+        ('MAINTENANCE', 'Under Maintenance'),
+        ('DECOMISSIONED', 'Decomissioned'),
     )
 
     equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE)
@@ -41,14 +53,14 @@ class EquipmentInstance(models.Model):
 def create_superuser(sender, **kwargs):
     if sender.name == 'equipments':
         EQUIPMENT, CREATED = Equipment.objects.get_or_create(
-            name="HP All-in-One PC", description="I5 6500 8GB RAM 1TB HDD")
+            name="HP All-in-One PC", description="I5 6500 8GB RAM 1TB HDD", category="PC")
         EQUIPMENT_INSTANCE, CREATED = EquipmentInstance.objects.get_or_create(
-            equipment=EQUIPMENT, status="Working", remarks="First PC of citc equipment tracker!")
+            equipment=EQUIPMENT, status="WORKING", remarks="First PC of citc equipment tracker!")
         EQUIPMENT, CREATED = Equipment.objects.get_or_create(
-            name="HP Keyboard", description="Generic Membrane Keyboard")
+            name="HP Keyboard", description="Generic Membrane Keyboard", category="PERIPHERALS")
         EQUIPMENT_INSTANCE, CREATED = EquipmentInstance.objects.get_or_create(
-            equipment=EQUIPMENT, status="Working", remarks="First keyboard of citc equipment tracker!")
+            equipment=EQUIPMENT, status="WORKING", remarks="First keyboard of citc equipment tracker!")
         EQUIPMENT, CREATED = Equipment.objects.get_or_create(
-            name="HP Mouse", description="Generic Mouse")
+            name="HP Mouse", description="Generic Mouse", category="PERIPHERALS")
         EQUIPMENT_INSTANCE, CREATED = EquipmentInstance.objects.get_or_create(
-            equipment=EQUIPMENT, status="Working", remarks="First mouse of citc equipment tracker!")
+            equipment=EQUIPMENT, status="WORKING", remarks="First mouse of citc equipment tracker!")
