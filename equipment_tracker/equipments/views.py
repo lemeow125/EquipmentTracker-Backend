@@ -12,7 +12,7 @@ class EquipmentViewSet(viewsets.ModelViewSet):
     if (not DEBUG):
         permission_classes = [IsAuthenticated, IsTechnician]
     serializer_class = serializers.EquipmentSerializer
-    queryset = Equipment.objects.all().order_by('-date_added')
+    queryset = Equipment.objects.all().order_by('id')
 
 # For viewing all  logs for all equipments
 
@@ -54,7 +54,7 @@ class EquipmentInstanceViewSet(viewsets.ModelViewSet):
     if (not DEBUG):
         permission_classes = [IsAuthenticated, IsTechnician]
     serializer_class = serializers.EquipmentInstanceSerializer
-    queryset = EquipmentInstance.objects.all().order_by('-date_added')
+    queryset = EquipmentInstance.objects.all().order_by('id')
 
 # For viewing all equipment instance logs
 
