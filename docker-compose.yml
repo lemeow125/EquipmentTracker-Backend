@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  # Django App
+  django_backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: equipmenttracker_backend:latest
+    ports:
+      - "8094:8000" # Expose port 8094 for the web server
+    environment:
+      - PYTHONBUFFERED=1
+    command:
+      [
+        "sh",
+        "-c",
+        "python equipment_tracker/manage.py spectacular --color --file stude/schema.yml && python equipment_tracker/manage.py collectstatic --noinput && python equipment_tracker/manage.py makemigrations && python equipment_tracker/manage.py migrate && python equipment_tracker/manage.py runserver",
+      ]
+    volumes:
+      - .:/code # For hotreloading
+volumes:
+  equipment_tracker:
