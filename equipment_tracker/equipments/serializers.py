@@ -47,7 +47,7 @@ class EquipmentLogsSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Equipment.history.model
-        fields = ('history_id', 'name', 'description', 'category',
+        fields = ('history_id', 'id', 'name', 'description', 'category',
                   'history_date', 'history_user')
         read_only_fields = ('history_id', 'id', 'name', 'description',
                             'history_date', 'history_user')
