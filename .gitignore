@@ -68,7 +68,7 @@ db.sqlite3-journal
 equipment_tracker/db.sqlite3
 equipment_tracker/.env
 equipment_tracker/static/*
-
+equipment_tracker/static/
 
 # Flask stuff:
 instance/
