@@ -64,9 +64,11 @@ cover/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+
 equipment_tracker/db.sqlite3
 equipment_tracker/.env
 equipment_tracker/static/*
+
 
 # Flask stuff:
 instance/
