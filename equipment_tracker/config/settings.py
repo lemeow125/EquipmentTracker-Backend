@@ -28,11 +28,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-FRONTEND_DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-# CSRF_TRUSTED_ORIGINS = [] To-do: Specify URL to web frontend
+CSRF_TRUSTED_ORIGINS = [
+    "https://equipment-tracker-backend.keannu1.duckdns.org"]
 
 # Email credentials
 EMAIL_HOST = ''
@@ -56,6 +56,8 @@ else:
 # Application definition
 
 INSTALLED_APPS = [
+    'unfold',
+    'unfold.contrib.simple_history',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -64,8 +66,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
+    'simple_history',
     'djoser',
-    'corsheaders'
+    'corsheaders',
+    'drf_spectacular',
+    'drf_spectacular_sidecar',
+    'accounts',
+    'equipments',
+    'equipment_groups',
 ]
 
 MIDDLEWARE = [
@@ -124,6 +132,19 @@ REST_FRAMEWORK = {
         'user': '1440/min'
 
     },
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+# DRF-Spectacular
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'CITC Equipment Tracker Backend',
+    'DESCRIPTION': 'An IT Elective 4 Project',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'SWAGGER_UI_DIST': 'SIDECAR',
+    'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
+    'REDOC_DIST': 'SIDECAR',
+    # OTHER SETTINGS
 }
 
 WSGI_APPLICATION = 'config.wsgi.application'
@@ -139,11 +160,19 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
 DJOSER = {
     'SEND_ACTIVATION_EMAIL': True,
     'SEND_CONFIRMATION_EMAIL': True,
+    'PASSWORD_RESET_CONFIRM_URL': 'reset_password_confirm/{uid}/{token}',
     'ACTIVATION_URL': 'activation/{uid}/{token}',
     'USER_AUTHENTICATION_RULES': ['djoser.authentication.TokenAuthenticationRule'],
+    'SERIALIZERS': {
+        'user': 'accounts.serializers.CustomUserSerializer',
+        'current_user': 'accounts.serializers.CustomUserSerializer',
+        'user_create': 'accounts.serializers.UserRegistrationSerializer',
+    },
 }
 
 # Password validation
@@ -182,11 +211,7 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-DOMAIN = ''
-if (FRONTEND_DEBUG):
-    DOMAIN = 'exp'
-else:
-    DOMAIN = 'citctracker'
+DOMAIN = 'equipment-tracker-frontend.keannu1.duckdns.org/#'
 
 SITE_NAME = 'CITC Equipment Tracker'
 
