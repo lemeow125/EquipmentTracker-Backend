@@ -12,7 +12,6 @@ class EquipmentGroup(models.Model):
     date_added = models.DateTimeField(default=now, editable=False)
     last_updated = models.DateTimeField(auto_now=True, editable=False)
     equipments = models.ManyToManyField(EquipmentInstance)
-    history = HistoricalRecords()
 
     @property
     def status(self):

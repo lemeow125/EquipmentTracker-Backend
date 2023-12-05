@@ -14,27 +14,6 @@ class EquipmentGroupViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.EquipmentGroupSerializer
     queryset = EquipmentGroup.objects.all().order_by('id')
 
-# For viewing all  logs for all equipments
-
-
-class EquipmentGroupsLogsViewSet(generics.ListAPIView):
-    if (not DEBUG):
-        permission_classes = [IsAuthenticated, IsTechnician]
-    serializer_class = serializers.EquipmentGroupLogsSerializer
-    queryset = EquipmentGroup.history.all().order_by('-history_date')
-
-# For viewing logs per individual equipment
-
-
-class EquipmentGroupLogViewSet(viewsets.ReadOnlyModelViewSet):
-    if (not DEBUG):
-        permission_classes = [IsAuthenticated, IsTechnician]
-    serializer_class = serializers.EquipmentGroupLogSerializer
-
-    def get_queryset(self):
-        group_id = self.kwargs['group_id']
-        return EquipmentGroup.objects.filter(id=group_id)
-
 # Last changed equipment
 
 
