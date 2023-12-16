@@ -64,7 +64,7 @@ class EquipmentLogSerializer(serializers.HyperlinkedModelSerializer):
         format="%m-%d-%Y %I:%M%p", read_only=True)
     last_updated_by = serializers.SerializerMethodField()
     name = serializers.CharField()
-    description = serializers.CharField(required=False)
+    description = serializers.CharField(required=False, allow_blank=True)
     history = EquipmentHistoricalRecordField()
 
     class Meta:
@@ -98,7 +98,7 @@ class EquipmentInstanceSerializer(serializers.HyperlinkedModelSerializer):
     category = serializers.CharField(
         source='equipment.category', read_only=True)
     status = serializers.CharField()
-    remarks = serializers.CharField(required=False)
+    remarks = serializers.CharField(required=False, allow_blank=True)
     date_added = serializers.DateTimeField(
         format="%m-%d-%Y %I:%M%p", read_only=True)
     last_updated = serializers.DateTimeField(
